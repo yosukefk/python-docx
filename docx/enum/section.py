@@ -101,3 +101,39 @@ class WD_SECTION_START(XmlEnumeration):
             'ODD_PAGE', 4, 'oddPage', 'Section begins on next odd page.'
         ),
     )
+
+@alias('XL_VALIGN')
+class XL_VALIGN(XmlEnumeration):
+    """
+    alias: **XL_VALIGN**
+
+    vertical alignment
+
+    Excample::
+
+        from docx.enum.secton import XL_VALIGN
+
+        section = document.section[0]
+        section.vertical_alignment = XL_VALIGN.CENTER
+    """
+    __ms_name__ = 'XlVAlign'
+
+    __url__ = 'https://docs.microsoft.com/en-us/office/vba/api/word.xlvalign'
+
+    __members__ = (
+        XmlMappedEnumMember(
+            'BOTTOM', -4107, 'bottom', 'bottom alignment.'
+        ),
+        XmlMappedEnumMember(
+            'CENTER', -4108, 'center', 'center alignment.'
+        ),
+        XmlMappedEnumMember(
+            'DISTRIBUTED', -4117, 'distributed', 'distributed alignment.'
+        ),
+        XmlMappedEnumMember(
+            'JUSTIFY', -4130, 'justified', 'justified alignment.'
+        ),
+        XmlMappedEnumMember(
+            'TOP', -4160, 'top', 'top alignment.'
+        ),
+    )

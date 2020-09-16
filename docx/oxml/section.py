@@ -6,7 +6,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from copy import deepcopy
 
-from docx.enum.section import WD_HEADER_FOOTER, WD_ORIENTATION, WD_SECTION_START
+from docx.enum.section import WD_HEADER_FOOTER, WD_ORIENTATION, WD_SECTION_START, XL_VALIGN
 from docx.oxml.simpletypes import ST_SignedTwipsMeasure, ST_TwipsMeasure, XsdString
 from docx.oxml.xmlchemy import (
     BaseOxmlElement,
@@ -30,6 +30,10 @@ class CT_HdrFtrRef(BaseOxmlElement):
     type_ = RequiredAttribute('w:type', WD_HEADER_FOOTER)
     rId = RequiredAttribute('r:id', XsdString)
 
+
+class CT_VAlign(BaseOxmlElement):
+    """`w:vAlign` element, specifying vertical alignment within page..."""
+    val = RequiredAttribute('w:val', XL_VALIGN)
 
 class CT_PageMar(BaseOxmlElement):
     """
@@ -69,6 +73,7 @@ class CT_SectPr(BaseOxmlElement):
     type = ZeroOrOne("w:type", successors=_tag_seq[3:])
     pgSz = ZeroOrOne("w:pgSz", successors=_tag_seq[4:])
     pgMar = ZeroOrOne("w:pgMar", successors=_tag_seq[5:])
+    vAlign = ZeroOrOne("w:vAlign", successors=_tag_seq[12:])
     titlePg = ZeroOrOne("w:titlePg", successors=_tag_seq[14:])
     del _tag_seq
 
@@ -343,6 +348,17 @@ class CT_SectPr(BaseOxmlElement):
         pgMar = self.get_or_add_pgMar()
         pgMar.top = value
 
+    @property
+    def vertical_alignment(self):
+        vAlign = self.vAlign
+        if vAlign is None:
+            return XL_VALIGN.TOP
+        return vAlign.val
+
+    @vertical_alignment.setter
+    def vertical_alignment(self, value):
+        vAlign = self.get_or_add_vAlign()
+        vAlign.val = value
 
 class CT_SectType(BaseOxmlElement):
     """

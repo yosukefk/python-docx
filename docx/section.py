@@ -258,6 +258,17 @@ class Section(object):
     def top_margin(self, value):
         self._sectPr.top_margin = value
 
+    @property
+    def vertical_alignment(self):
+        """vertical alignment within a page"""
+        return self._sectPr.vertical_alignment
+
+    @vertical_alignment.setter
+    def vertical_alignment(self, value):
+        self._sectPr.vertical_alignment = value
+
+    
+
 
 class _BaseHeaderFooter(BlockItemContainer):
     """Base class for header and footer classes"""

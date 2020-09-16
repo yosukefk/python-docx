@@ -93,6 +93,7 @@ from .section import (  # noqa
     CT_PageSz,
     CT_SectPr,
     CT_SectType,
+    CT_VAlign
 )
 register_element_cls("w:footerReference", CT_HdrFtrRef)
 register_element_cls("w:ftr", CT_HdrFtr)
@@ -102,6 +103,7 @@ register_element_cls("w:pgMar", CT_PageMar)
 register_element_cls("w:pgSz", CT_PageSz)
 register_element_cls("w:sectPr", CT_SectPr)
 register_element_cls("w:type", CT_SectType)
+register_element_cls("w:vAlign", CT_VAlign)
 
 from .settings import CT_Settings  # noqa
 register_element_cls("w:settings", CT_Settings)
@@ -178,7 +180,9 @@ register_element_cls('w:tcW',        CT_TblWidth)
 register_element_cls('w:tr',         CT_Row)
 register_element_cls('w:trHeight',   CT_Height)
 register_element_cls('w:trPr',       CT_TrPr)
-register_element_cls('w:vAlign',     CT_VerticalJc)
+# this 'w:vAlign' occurs for section as well
+# how do i specify namesapce....??
+#register_element_cls('w:vAlign',     CT_VerticalJc)
 register_element_cls('w:vMerge',     CT_VMerge)
 
 from .text.font import (  # noqa
